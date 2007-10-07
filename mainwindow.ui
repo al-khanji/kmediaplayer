@@ -1,0 +1,161 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>361</width>
+    <height>278</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>KMediaPlayer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QVBoxLayout" >
+    <property name="leftMargin" >
+     <number>0</number>
+    </property>
+    <property name="topMargin" >
+     <number>0</number>
+    </property>
+    <property name="rightMargin" >
+     <number>0</number>
+    </property>
+    <property name="bottomMargin" >
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="Phonon::VideoWidget" native="1" name="videoWidget" />
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar" />
+  <widget class="KMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>361</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File" >
+    <property name="title" >
+     <string>&amp;File</string>
+    </property>
+    <addaction name="openAction" />
+    <addaction name="separator" />
+    <addaction name="playAction" />
+    <addaction name="stopAction" />
+    <addaction name="separator" />
+    <addaction name="fullscreenAction" />
+    <addaction name="separator" />
+    <addaction name="quitAction" />
+   </widget>
+   <addaction name="menu_File" />
+  </widget>
+  <widget class="KToolBar" name="playbackToolbar" >
+   <property name="windowTitle" >
+    <string>Playback Toolbar</string>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="playAction" />
+   <addaction name="stopAction" />
+   <addaction name="separator" />
+   <addaction name="fullscreenAction" />
+  </widget>
+  <action name="openAction" >
+   <property name="text" >
+    <string>&amp;Open</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="playAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>&amp;Play</string>
+   </property>
+   <property name="shortcut" >
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="stopAction" >
+   <property name="text" >
+    <string>&amp;Stop</string>
+   </property>
+  </action>
+  <action name="quitAction" >
+   <property name="text" >
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="fullscreenAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>&amp;Full Screen Mode</string>
+   </property>
+   <property name="iconText" >
+    <string>Full Screen</string>
+   </property>
+   <property name="toolTip" >
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut" >
+    <string>F</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KMenuBar</class>
+   <extends>QMenuBar</extends>
+   <header location="global" >kmenubar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Phonon::VideoWidget</class>
+   <extends>QWidget</extends>
+   <header location="global" >phonon/videowidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KToolBar</class>
+   <extends>QToolBar</extends>
+   <header location="global" >ktoolbar.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>quitAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
