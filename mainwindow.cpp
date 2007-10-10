@@ -282,7 +282,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 
     Phonon::VideoWidget* widget = qobject_cast<Phonon::VideoWidget*>(obj);
     if (!widget)
-        return QMainWindow::eventFilter(obj, event);
+        goto NO_WIDGET; // eek a goto!
 
     switch (event->type()) {
     case QEvent::LayoutRequest:
@@ -303,10 +303,13 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
                         activateWindow();
                     }
                 }
+                retval = true;
+            } else {
+                retval = QMainWindow::eventFilter(obj, event);
             }
-            retval = QMainWindow::eventFilter(obj, event);
         }
         break;
+NO_WIDGET:
     default:
         retval = QMainWindow::eventFilter(obj, event);
         break;
