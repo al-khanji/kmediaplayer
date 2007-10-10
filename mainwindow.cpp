@@ -39,7 +39,7 @@
 
 static const char* LOADING_MESSAGE = I18N_NOOP("Loading");
 static const char* BUFFERING_MESSAGE = I18N_NOOP("Buffering");
-static const char* ERROR_MESSAGE = I18N_NOOP("The following critical error"
+static const char* ERROR_MESSAGE = I18N_NOOP("The following error"
                                              " was encountered: <br>"
                                              " <center>%1<center>");
 
