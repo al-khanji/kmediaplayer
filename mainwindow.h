@@ -20,6 +20,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QByteArray>
+
 #include <kurl.h>
 #include <phonon/phononnamespace.h>
 
@@ -56,6 +58,9 @@ class MainWindow : public KMainWindow, public Ui_MainWindow
         void toggleFullScreen(bool toggle);
         void playTriggered(bool checked);
 
+    protected:
+        bool eventFilter(QObject* obj, QEvent* event);
+
     private:
         Phonon::MediaObject* m_mediaObject;
         Phonon::AudioOutput* m_audioOutput;
@@ -64,6 +69,9 @@ class MainWindow : public KMainWindow, public Ui_MainWindow
 
         void showStatusMessage(QString msg);
         QString formatMilliSeconds(qint64 millisecs);
+
+        QByteArray m_normalGeometry;
+        QByteArray m_fullScreenGeometry;
 };
 
 #endif // MAINWINDOW_H

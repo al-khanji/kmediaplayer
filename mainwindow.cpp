@@ -18,6 +18,8 @@
 */
 
 #include <QProgressBar>
+#include <QEvent>
+#include <QMouseEvent>
 
 #include <kdebug.h>
 #include <kstatusbar.h>
@@ -28,6 +30,7 @@
 #include <kurl.h>
 #include <kfiledialog.h>
 #include <klocale.h>
+#include <kwindowsystem.h>
 
 #include <phonon/seekslider.h>
 #include <phonon/mediaobject.h>
@@ -70,6 +73,7 @@ MainWindow::MainWindow() : KMainWindow(),
             this, SLOT(toggleFullScreen(bool)));
 
     videoWidget->hide();
+    videoWidget->installEventFilter(this);
     fullscreenAction->setEnabled(false);
 
     m_mediaObject = new Phonon::MediaObject(this);
@@ -143,15 +147,11 @@ void MainWindow::mediaStateChanged(Phonon::State newState,
         playAction->setChecked(false);
         m_progress->hide();
         showStatusMessage("");
-        if (m_mediaObject->hasVideo())
-            videoWidget->resize(videoWidget->sizeHint());
         break;
     case Phonon::PlayingState:
         playAction->setChecked(true);
         m_progress->hide();
         showStatusMessage("");
-        if (m_mediaObject->hasVideo())
-            videoWidget->resize(videoWidget->sizeHint());
         break;
     case Phonon::ErrorState:
         KMessageBox::error(this,
@@ -187,11 +187,13 @@ void MainWindow::mediaHasVideoChanged(bool available)
 {
     videoWidget->setVisible(available);
     fullscreenAction->setEnabled(available);
+    if (!available)
+        resize(width(), 0);
 }
 
 void MainWindow::mediaBufferStatus(int percent)
 {
-    m_progress->show();
+    m_progress->setVisible(percent != 100);
     m_progress->setValue(percent);
 }
 
@@ -237,11 +239,55 @@ void MainWindow::stop()
 void MainWindow::toggleFullScreen(bool toggle)
 {
     if (toggle) {
-        resize(width(), 0);
+        m_normalGeometry = saveGeometry();
         videoWidget->enterFullScreen();
+        resize(width(), 0);
+        m_fullScreenGeometry = saveGeometry();
+        hide();
     } else {
+        show();
         videoWidget->exitFullScreen();
+        restoreGeometry(m_normalGeometry);
     }
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event)
+{
+    bool retval = false;
+
+    Phonon::VideoWidget* widget = qobject_cast<Phonon::VideoWidget*>(obj);
+    if (!widget)
+        return QMainWindow::eventFilter(obj, event);
+
+    switch (event->type()) {
+    case QEvent::LayoutRequest:
+        retval = true;
+        resize(sizeHint());
+        break;
+    case QEvent::MouseButtonPress:
+        {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            if (mouseEvent->button() == Qt::LeftButton) {
+                if (widget->isWindow()) {
+                    if (isVisible()) {
+                        m_fullScreenGeometry = saveGeometry();
+                        hide();
+                    } else {
+                        show();
+                        restoreGeometry(m_fullScreenGeometry);
+                        activateWindow();
+                    }
+                }
+            }
+            retval = QMainWindow::eventFilter(obj, event);
+        }
+        break;
+    default:
+        retval = QMainWindow::eventFilter(obj, event);
+        break;
+    }
+
+    return retval;
 }
 
 #include "mainwindow.moc"
