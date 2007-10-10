@@ -75,6 +75,22 @@ MainWindow::MainWindow() : KMainWindow(),
     videoWidget->installEventFilter(this);
     fullscreenAction->setEnabled(false);
 
+    QAction *a = 0;
+
+    videoWidget->addAction(openAction);
+    a = new QAction(this);
+    a->setSeparator(true);
+    videoWidget->addAction(a);
+    videoWidget->addAction(playAction);
+    videoWidget->addAction(stopAction);
+    videoWidget->addAction(fullscreenAction);
+    a = new QAction(this);
+    a->setSeparator(true);
+    videoWidget->addAction(a);
+    videoWidget->addAction(quitAction);
+
+    videoWidget->setContextMenuPolicy(Qt::ActionsContextMenu);
+
     m_mediaObject = new Phonon::MediaObject(this);
     m_audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory);
 
@@ -243,10 +259,12 @@ void MainWindow::toggleFullScreen(bool toggle)
         resize(width(), 0);
         m_fullScreenGeometry = saveGeometry();
         hide();
+        fullscreenAction->setIcon(KIcon("view-restore"));
     } else {
         show();
         videoWidget->exitFullScreen();
         restoreGeometry(m_normalGeometry);
+        fullscreenAction->setIcon(KIcon("view-fullscreen"));
     }
 }
 
