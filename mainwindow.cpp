@@ -30,7 +30,6 @@
 #include <kurl.h>
 #include <kfiledialog.h>
 #include <klocale.h>
-#include <kwindowsystem.h>
 
 #include <phonon/seekslider.h>
 #include <phonon/mediaobject.h>

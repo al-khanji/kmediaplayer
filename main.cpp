@@ -19,6 +19,7 @@
 
 #include <kapplication.h>
 #include <kcmdlineargs.h>
+#include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
 
@@ -33,9 +34,22 @@ int main(int argc, char** argv)
                          ki18n("Copyright (c) 2007 Louai Al-Khanji"),
                          KLocalizedString(), QByteArray(),
                          "louai.khanji@gmail.com");
+
     KCmdLineArgs::init(argc, argv, &aboutData);
+
+    KCmdLineOptions options;
+    options.add("+url", ki18n("The media to play"));
+    KCmdLineArgs::addCmdLineOptions(options);
+
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+
     KApplication app;
     MainWindow* win = new MainWindow;
     win->show();
+
+    if (args->count() > 0) { // just open the first file if passed many
+        win->open(args->url(0));
+    }
+
     return app.exec();
 }
