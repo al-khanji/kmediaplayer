@@ -282,37 +282,37 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 
     Phonon::VideoWidget* widget = qobject_cast<Phonon::VideoWidget*>(obj);
     if (!widget)
-        goto NO_WIDGET; // eek a goto!
-
-    switch (event->type()) {
-    case QEvent::LayoutRequest:
-        retval = true;
-        resize(sizeHint());
-        break;
-    case QEvent::MouseButtonPress:
-        {
-            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-            if (mouseEvent->button() == Qt::LeftButton) {
-                if (widget->isWindow()) {
-                    if (isVisible()) {
-                        m_fullScreenGeometry = saveGeometry();
-                        hide();
-                    } else {
-                        show();
-                        restoreGeometry(m_fullScreenGeometry);
-                        activateWindow();
-                    }
-                }
-                retval = true;
-            } else {
-                retval = QMainWindow::eventFilter(obj, event);
-            }
-        }
-        break;
-NO_WIDGET:
-    default:
         retval = QMainWindow::eventFilter(obj, event);
-        break;
+    else {
+        switch (event->type()) {
+        case QEvent::LayoutRequest:
+            retval = true;
+            resize(sizeHint());
+            break;
+        case QEvent::MouseButtonPress:
+            {
+                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+                if (mouseEvent->button() == Qt::LeftButton) {
+                    if (widget->isWindow()) {
+                        if (isVisible()) {
+                            m_fullScreenGeometry = saveGeometry();
+                            hide();
+                        } else {
+                            show();
+                            restoreGeometry(m_fullScreenGeometry);
+                            activateWindow();
+                        }
+                    }
+                    retval = true;
+                } else {
+                    retval = QMainWindow::eventFilter(obj, event);
+                }
+            }
+            break;
+        default:
+            retval = QMainWindow::eventFilter(obj, event);
+            break;
+        }
     }
 
     return retval;
