@@ -12,6 +12,9 @@
   <property name="windowTitle" >
    <string>KMediaPlayer</string>
   </property>
+  <property name="whatsThis" >
+   <string>KMediaPlayer main window</string>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QVBoxLayout" >
     <property name="leftMargin" >
@@ -27,11 +30,19 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="Phonon::VideoWidget" native="1" name="videoWidget" />
+     <widget class="Phonon::VideoWidget" native="1" name="videoWidget" >
+      <property name="whatsThis" >
+       <string>If the selected media has video it is shown here.</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
+  <widget class="QStatusBar" name="statusbar" >
+   <property name="whatsThis" >
+    <string>Media status information</string>
+   </property>
+  </widget>
   <widget class="KMenuBar" name="menubar" >
    <property name="geometry" >
     <rect>
@@ -75,6 +86,9 @@
    <property name="text" >
     <string>&amp;Open</string>
    </property>
+   <property name="whatsThis" >
+    <string>Open file for playback</string>
+   </property>
    <property name="shortcut" >
     <string>Ctrl+O</string>
    </property>
@@ -86,6 +100,9 @@
    <property name="text" >
     <string>&amp;Play</string>
    </property>
+   <property name="whatsThis" >
+    <string>Start playback</string>
+   </property>
    <property name="shortcut" >
     <string>Space</string>
    </property>
@@ -94,10 +111,16 @@
    <property name="text" >
     <string>&amp;Stop</string>
    </property>
+   <property name="whatsThis" >
+    <string>Stop playback</string>
+   </property>
   </action>
   <action name="quitAction" >
    <property name="text" >
     <string>&amp;Quit</string>
+   </property>
+   <property name="whatsThis" >
+    <string>Quit KMediaPlayer</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+Q</string>
@@ -116,8 +139,45 @@
    <property name="toolTip" >
     <string>Full Screen</string>
    </property>
+   <property name="whatsThis" >
+    <string>Switch to full screen mode</string>
+   </property>
    <property name="shortcut" >
     <string>F</string>
+   </property>
+  </action>
+  <action name="seekLeftAction" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Seek Left</string>
+   </property>
+   <property name="shortcut" >
+    <string>Left</string>
+   </property>
+   <property name="shortcutContext" >
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="seekRightAction" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Seek Right</string>
+   </property>
+   <property name="shortcut" >
+    <string>Right</string>
+   </property>
+   <property name="shortcutContext" >
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
    </property>
   </action>
  </widget>
