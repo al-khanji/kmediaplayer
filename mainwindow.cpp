@@ -47,6 +47,8 @@ static const char* ERROR_MESSAGE = I18N_NOOP("The following error"
 static const int STATUS_MESSAGE_FIELD = 0;
 static const int PLAYBACK_TIME_FIELD = 1;
 
+static const int SEEK_OFFSET = 25000;
+
 MainWindow::MainWindow() : KMainWindow(),
                            m_mediaObject(0),
                            m_audioOutput(0),
@@ -71,12 +73,19 @@ MainWindow::MainWindow() : KMainWindow(),
             this, SLOT(stop()));
     connect(fullscreenAction, SIGNAL(toggled(bool)),
             this, SLOT(toggleFullScreen(bool)));
+    connect(seekLeftAction, SIGNAL(triggered()),
+            this, SLOT(seekLeft()));
+    connect(seekRightAction, SIGNAL(triggered()),
+            this, SLOT(seekRight()));
 
     videoWidget->hide();
     videoWidget->installEventFilter(this);
     fullscreenAction->setEnabled(false);
 
     QAction *a = 0;
+
+    videoWidget->addAction(seekLeftAction);
+    videoWidget->addAction(seekRightAction);
 
     videoWidget->addAction(openAction);
     a = new QAction(this);
@@ -317,6 +326,25 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
     }
 
     return retval;
+}
+
+void MainWindow::seekLeft()
+{
+    if (playAction->isChecked() && m_mediaObject->isSeekable()) {
+        qint64 current = m_mediaObject->currentTime();
+        qint64 time = qMax(qint64(0), current - SEEK_OFFSET);
+        m_mediaObject->seek(time);
+    }
+}
+
+void MainWindow::seekRight()
+{
+    if (playAction->isChecked() && m_mediaObject->isSeekable()) {
+        qint64 current = m_mediaObject->currentTime();
+        qint64 total = m_mediaObject->totalTime();
+        qint64 time = qMin(total, current + SEEK_OFFSET);
+        m_mediaObject->seek(time);
+    }
 }
 
 #include "mainwindow.moc"

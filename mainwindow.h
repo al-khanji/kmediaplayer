@@ -47,6 +47,8 @@ class MainWindow : public KMainWindow, public Ui_MainWindow
     public slots:
         void open();
         void stop();
+        void seekLeft();
+        void seekRight();
 
     private slots:
         void mediaStateChanged(Phonon::State newState, Phonon::State oldState);
