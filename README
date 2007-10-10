@@ -1,0 +1,33 @@
+KMediaPlayer Readme
+-------------------
+
+KMediaPlayer is copyright (c) Louai Al-Khanji. Redistribution as stipulated
+by the GPL version 2 is allowed. See the file COPYING for details.
+
+Bugs and sensible feature requests to louai.khanji@gmail.com please.
+
+Abstract
+--------
+
+KMediaPlayer is a simple media player aimed mainly at the KDE4 desktop. It
+makes use of Phonon for media playback. The innovation sprang out of a
+discussion on http://dot.kde.org [1].
+
+The main aim of KMediaPlayer is to be small, easy to use, and to the point. It
+does not aim to be another Kaffeine or Amarok. The main use case is for quick
+playback from file managers, i.e. mostly Konqueror or Dolphin.
+
+[1] http://dot.kde.org/1191203775/1191241062/
+
+Installation
+------------
+
+To install, you need kdelibs and kdebase. Versions as of 2007-10-10 seem to
+work fine. Additionally you need cmake, and of course all KDE dependencies.
+
+Steps to install:
+ 1. mkdir build
+ 2. cd build
+ 3. cmake ..
+ 4. make
+ 5. make install
