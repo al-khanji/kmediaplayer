@@ -23,3 +23,4 @@ target_link_libraries(${BIN_NAME} kio phonon ${KDE4_KDEUI_LIBS})
 
 install(TARGETS ${BIN_NAME} DESTINATION ${BIN_INSTALL_DIR})
 install(FILES kmediaplayer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+# kde4_create_handbook(index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/en)

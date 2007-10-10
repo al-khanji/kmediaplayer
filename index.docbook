@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&kmediaplayer;">
+  <!ENTITY kmediaplayer "<application>KMediaPlayer</application>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &kmediaplayer; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Louai</firstname>
+<surname>Al-Khanji</surname>
+<affiliation>
+<address><email>louai.khanji@gmail.com</email></address>
+</affiliation>
+</author>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+</authorgroup>
+
+<copyright>
+<year>2007</year>
+<holder>Louai.Al-Khanji</holder>
+</copyright>
+<!-- <legalnotice>&FDLNotice;</legalnotice> -->
+
+<date>2004-05-06</date>
+<releaseinfo>2.1</releaseinfo>
+
+<abstract>
+<para>
+&juk; is a jukebox, tagger and music collection manager.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdemultimedia</keyword>
+<keyword>audio</keyword>
+<keyword>tagger</keyword>
+<keyword>player</keyword>
+<keyword>jukebox</keyword>
+<keyword>JuK</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+<para>Intro goes here</para>
+</chapter>
+</book>
