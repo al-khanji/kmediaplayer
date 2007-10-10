@@ -244,7 +244,8 @@ void MainWindow::showStatusMessage(QString msg)
 void MainWindow::playTriggered(bool checked)
 {
     if (checked) {
-        if (m_mediaObject->currentSource().type() != Phonon::MediaSource::Invalid) {
+        Phonon::MediaSource::Type type = m_mediaObject->currentSource().type();
+        if (type != Phonon::MediaSource::Invalid) {
             m_mediaObject->play();
         } else {
             open();
