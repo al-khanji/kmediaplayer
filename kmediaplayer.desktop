@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+TryExec=kmediaplayer
+Exec=kmediaplayer %u
+Icon=kmediaplayer
+X-DocPath=kmediaplayer/index.html
+Comment=
+Terminal=false
+Name=KMediaPlayer
+# Name[x-test]=xxKMediaPlayerxx
+GenericName=A Simple Media Player
+Categories=Qt;KDE;AudioVideo;

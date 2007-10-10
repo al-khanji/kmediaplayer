@@ -22,3 +22,4 @@ kde4_add_executable(${BIN_NAME} ${APP_SRC})
 target_link_libraries(${BIN_NAME} kio phonon ${KDE4_KDEUI_LIBS})
 
 install(TARGETS ${BIN_NAME} DESTINATION ${BIN_INSTALL_DIR})
+install(FILES kmediaplayer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
