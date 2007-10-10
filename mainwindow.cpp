@@ -34,6 +34,7 @@
 #include <phonon/seekslider.h>
 #include <phonon/mediaobject.h>
 #include <phonon/audiooutput.h>
+#include <phonon/mediasource.h>
 
 #include "mainwindow.h"
 
@@ -134,10 +135,17 @@ void MainWindow::open()
 
 void MainWindow::open(KUrl url)
 {
-    fullscreenAction->setChecked(false);
-    setCaption("");
-    m_mediaObject->setCurrentSource(url);
-    m_mediaObject->play();
+    if (url != "") {
+        fullscreenAction->setChecked(false);
+        setCaption("");
+        m_mediaObject->setCurrentSource(url);
+        m_mediaObject->play();
+    } else {
+        Phonon::MediaSource::Type type = m_mediaObject->currentSource().type();
+        if (type == Phonon::MediaSource::Invalid) {
+            playAction->setChecked(false);
+        }
+    }
 }
 
 void MainWindow::mediaStateChanged(Phonon::State newState,
